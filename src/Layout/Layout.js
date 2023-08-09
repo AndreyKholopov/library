@@ -12,7 +12,6 @@ import { setList, setLoadList } from "../store/slices/listSlice";
 import { setAccessToken, setUserUid } from "../store/slices/userSlice";
 import './Layout.scss'
 import checkUser from "../api/checkUser";
-import itemTypes from "../constants/itemTypes";
 
 function Layout() {
   const location = useLocation()

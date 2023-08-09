@@ -4,6 +4,7 @@ import addImage from "../../../assets/addImage.svg"
 import BlockButton from "./BlockButton";
 import StyleButton from "./StyleButton";
 import ImageButton from "./ImageButton";
+import LinkButton from "./LinkButton";
 
 const Toolbar = ({
   editorState,
@@ -49,10 +50,11 @@ const Toolbar = ({
     render: <img src={addImage} alt="Добавление изображения" width="25px" />
   }
 
-  // const linkButton = {
-  //   setting: 'IMAGE',
-  //   render: <img src={addImage} alt="Добавление изображения" width="25px" />
-  // }
+  const linkButton = {
+    setting: 'LINK',
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid  
+    render: <a href="#">Ссылка</a>
+  }
 
   return (
     <div className='editor__toolbar'>
@@ -83,6 +85,14 @@ const Toolbar = ({
         onChange={onChange}
         setting={imageButton.setting}
         render={imageButton.render}
+        disabled={disabled}
+      />
+
+      <LinkButton
+        editorState={editorState}
+        onChange={onChange}
+        setting={linkButton.setting}
+        render={linkButton.render}
         disabled={disabled}
       />
     </div>

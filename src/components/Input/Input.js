@@ -22,6 +22,8 @@ const Input = ({
   list,
   listItemContent,
   handleClickOnList,
+  oneLineItem,
+  hideLabelIfActive,
   ...attrs
 }) => {
   const [active, setActive] = useState(false)
@@ -30,7 +32,7 @@ const Input = ({
 
   useEffect(() => {
     setShowValue(list?.find(el => el.value === value)?.name || '')
-    
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
 
@@ -43,7 +45,8 @@ const Input = ({
 
   const classesField = classNames(
     'input__field',
-    list && active && 'input__field_active',
+    !hideLabelIfActive && 'input__field_active-animation',
+    active && 'input__field_active',
     isSelect && 'input__field_is-select'
   )
 
@@ -80,7 +83,8 @@ const Input = ({
           {...attrs}
         />
 
-        <span className={classesLabel}>{label}</span>
+        {(!hideLabelIfActive || (hideLabelIfActive && !active && !value)) &&
+          <span className={classesLabel}>{label}</span>}
       </label>
 
       {list && <DropList
@@ -88,6 +92,7 @@ const Input = ({
         list={list}
         load={loadList}
         itemContent={listItemContent}
+        oneLineItem={oneLineItem}
         handleClickOnList={(e, el) => {
           if (handleClickOnList) handleClickOnList(el)
           setActive(false)
@@ -114,6 +119,8 @@ Input.propTypes = {
   disabled: PropTypes.bool,
   loadList: PropTypes.bool,
   isSelect: PropTypes.bool,
+  oneLineItem: PropTypes.bool,
+  hideLabelIfActive: PropTypes.bool,
   handleClickOnList: PropTypes.func,
   list: PropTypes.array,
 }
@@ -121,7 +128,9 @@ Input.propTypes = {
 Input.defaultProps = {
   className: '',
   disabled: false,
+  oneLineItem: false,
   isSelect: false,
+  hideLabelIfActive: false,
   backgroundColor: 'white',
   textColor: '#212121',
   bezelSize: '0.5rem',

@@ -8,7 +8,8 @@ const DropList = ({
   itemContent,
   list,
   load,
-  handleClickOnList
+  handleClickOnList,
+  oneLineItem
 }) => {
 
   const ulClasses = classNames(
@@ -18,6 +19,7 @@ const DropList = ({
 
   const liClasses = classNames(
     'drop__item',
+    oneLineItem && 'drop__item_one-line'
   )
 
   const dynamicStyles = (itemColor) => {
@@ -47,6 +49,7 @@ const DropList = ({
 DropList.propTypes = {
   active: PropTypes.bool,
   load: PropTypes.bool,
+  oneLineItem: PropTypes.bool,
   itemContent: PropTypes.string,
   handleClickOnList: PropTypes.func,
   list: PropTypes.array,

@@ -19,6 +19,11 @@
     border-top: 3px solid currentColor;
     background: var(--item-color);
 
+    &_one-line {
+      overflow: hidden;
+      height: 18px;
+    }
+
     &:first-child {
       border-top: 0px;
     }

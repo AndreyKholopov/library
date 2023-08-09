@@ -41,10 +41,12 @@
       outline: none;
     }
 
-    &:focus,
-    &:not(:placeholder-shown) {
-      & + .input__label {
-        transform: translate(0.25rem, -95%) scale(0.8);
+    &_active-animation {
+      &:focus,
+      &:not(:placeholder-shown) {
+        & + .input__label {
+          transform: translate(0.25rem, -95%) scale(0.8);
+        }
       }
     }
 

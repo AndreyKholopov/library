@@ -10,19 +10,21 @@ import PropTypes from "prop-types"
 import Toolbar from "./Toolbar/Toolbar"
 import createDndFilePlugin from "./plugins/dndFiles"
 import createCodeStyle from "./plugins/codeStyle"
+import decorator from "./decorator/linkDecorator"
 import "./CustomEditor.scss"
+import { EditorState } from "draft-js"
 
 const resizeablePlugin = createResizeablePlugin()
 const focusPlugin = createFocusPlugin()
 const dndFilePlugin = createDndFilePlugin()
 const codeStyle = createCodeStyle()
 
-const decorator = composeDecorators(
+const imageDecorator = composeDecorators(
   resizeablePlugin.decorator,
   focusPlugin.decorator
 )
 
-const imagePlugin = createImagePlugin({ decorator })
+const imagePlugin = createImagePlugin({ decorator: imageDecorator })
 
 const CustomEditor = ({
   className,
@@ -65,7 +67,7 @@ const CustomEditor = ({
 
         <Editor
           editorState={editorState}
-          onChange={onChange}
+          onChange={(state) => onChange(EditorState.set(state, {decorator}))}
           plugins={plugins}
           spellCheck={true}
           tabIndex={disabled ? -1 : 0}

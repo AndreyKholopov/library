@@ -1,0 +1,8 @@
+.layout {
+  &__add-button {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 100;
+  }
+}

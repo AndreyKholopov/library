@@ -1,0 +1,108 @@
+.editor {
+  box-sizing: border-box;
+  display: block;
+  border: 3px solid currentColor;
+  border-radius: var(--size-radius);
+  border-color: var(--color-border);
+
+  &_disabled {
+    opacity: 0.5;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  &__toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-bottom: 3px solid currentColor;
+    padding: 10px 15px;
+
+    &-button {
+      border: 3px solid currentColor;
+      border-radius: 8px;
+      padding: 5px 7.5px;
+      background: white;
+      flex-basis: content;
+      cursor: pointer;
+
+      h1,
+      h3,
+      p,
+      pre {
+        background: white;
+        color: #000;
+        margin: 0;
+      }
+
+      &:hover,
+      &:focus-visible,
+      &_active {
+        background-color: #eaeaff;
+
+        pre {
+          background-color: #eaeaff;
+        }
+      }
+
+      &:disabled {
+        cursor: default;
+      }
+    }
+
+    &-popout {
+      display: none;
+      background: white;
+      border: 3px solid currentColor;
+      border-radius: 8px;
+      padding: 5px 7.5px;
+      position: fixed;
+      z-index: 100;
+
+      &_active {
+        display: block;
+      }
+    }
+
+    &-drop-area {
+      height: 100px;
+      width: 200px;
+      background: linear-gradient(90deg, currentColor 50%, transparent 50%),
+        linear-gradient(90deg, currentColor 50%, transparent 50%),
+        linear-gradient(0deg, currentColor 50%, transparent 50%),
+        linear-gradient(0deg, currentColor 50%, transparent 50%);
+      background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+      background-size: 15px 3px, 15px 3px, 3px 15px, 3px 15px;
+      background-position: 0px 0px, 210px 117px, 0px 116px, 216px 0px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+
+      &_active {
+        animation: border-dance 4s infinite linear;
+
+        @keyframes border-dance {
+          0% {
+            background-position: 0px 0px, 200px 117px, 0px 150px, 216px 0px;
+          }
+          100% {
+            background-position: 200px 0px, 0px 117px, 0px 0px, 216px 150px;
+          }
+        }
+      }
+    }
+  }
+
+  &__content {
+    padding: 10px 15px;
+  }
+
+  .DraftEditor-root {
+    padding: 10px 15px;
+  }
+}

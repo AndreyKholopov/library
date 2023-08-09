@@ -1,0 +1,106 @@
+@import url("https://rsms.me/inter/inter.css");
+
+body {
+  position: relative;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px 50px 100px 50px;
+  font-family: "Inter", sans-serif;
+  background: #ccccff;
+}
+
+main {
+  margin-top: 25px;
+}
+
+img {
+  margin: 0 auto;
+  display: block;
+}
+
+p {
+  margin: 0;
+}
+
+pre {
+  padding: 0;
+  margin: 0;
+  color: rgb(191, 199, 213);
+  background-color: rgb(41, 45, 62);
+
+  &.public-DraftStyleDefault-pre {
+    background-color: transparent;
+  }
+
+  &.code-block {
+    &__start {
+      padding-top: 16px;
+      border-top-left-radius: 16px;
+      border-top-right-radius: 16px;
+      counter-reset: code;
+    }
+
+    &__end {
+      padding-bottom: 16px;
+      border-bottom-left-radius: 16px;
+      border-bottom-right-radius: 16px;
+    }
+  }
+
+  div {
+    display: contents;
+  }
+
+  code,
+  span span {
+    padding: 16px;
+
+    &::before {
+      counter-increment: code;
+      content: counter(code) "  ";
+    }
+  }
+}
+
+.announcement {
+  text-align: center;
+}
+
+.item-type {
+  margin-top: 0;
+  text-align: end;
+}
+
+.hidden {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}

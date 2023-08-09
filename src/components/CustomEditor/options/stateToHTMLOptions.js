@@ -1,4 +1,4 @@
-export default {
+const stateToHTMLOptions = {
   entityStyleFn: (entity) => {
     const entityType = entity.get('type')
 
@@ -43,3 +43,5 @@ export default {
     }
   }
 }
+
+export default stateToHTMLOptions

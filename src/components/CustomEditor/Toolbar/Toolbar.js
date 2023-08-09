@@ -49,10 +49,10 @@ const Toolbar = ({
     render: <img src={addImage} alt="Добавление изображения" width="25px" />
   }
 
-  const linkButton = {
-    setting: 'IMAGE',
-    render: <img src={addImage} alt="Добавление изображения" width="25px" />
-  }
+  // const linkButton = {
+  //   setting: 'IMAGE',
+  //   render: <img src={addImage} alt="Добавление изображения" width="25px" />
+  // }
 
   return (
     <div className='editor__toolbar'>

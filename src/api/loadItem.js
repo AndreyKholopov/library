@@ -5,7 +5,7 @@ const loadItem = async (id) => {
   try {
     const docSnap = await getDoc(doc(database, "item", id))
 
-    if (!docSnap.exists()) throw "This item not exist"
+    if (!docSnap.exists()) throw new Error("This item not exist")
     
     console.log("Succeed load item")
 

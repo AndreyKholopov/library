@@ -13,9 +13,9 @@ const handleDroppedFiles = async (
   const atomicBlock = contentState.getBlocksAsArray().filter(el => el.text === result.slice(-5))
 
   try {
-    if (!atomicBlock.length) throw 'Используйте вставку изображений с помощью тулбара'
+    if (!atomicBlock.length) throw new Error('Используйте вставку изображений с помощью тулбара')
 
-    if (atomicBlock[0].getKey() === selection.getStartKey()) throw 'Ошибка: нельзя перетащить изображение на то же место' 
+    if (atomicBlock[0].getKey() === selection.getStartKey()) throw new Error('Ошибка: нельзя перетащить изображение на то же место')
 
     const newState = AtomicBlockUtils.moveAtomicBlock(editorState, atomicBlock[0], selection)
 

@@ -1,4 +1,4 @@
-export default [
+const itemTypes = [
   {
     value: 'note',
     name: 'Заметка',
@@ -15,3 +15,5 @@ export default [
     color: '#ff7569'
   }
 ]
+
+export default itemTypes

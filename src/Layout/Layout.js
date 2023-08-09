@@ -2,6 +2,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
 import classNames from "classnames";
+import Fuse from "fuse.js";
 
 import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
@@ -23,6 +24,14 @@ function Layout() {
   const load = useSelector((state) => state.list.load)
   const list = useSelector((state) => state.list.data)
 
+  const fuseOptions = {
+    includeScore: true,
+    keys: [
+      "searchTags"
+    ]
+  }
+  const fuse = new Fuse(list, fuseOptions);
+
   const addButtonLocationsNotVisible = [
     '/create'
   ]
@@ -38,11 +47,11 @@ function Layout() {
   }, [])
 
   const filteredList = () => {
-    return list.filter(item => item.searchTags.toLowerCase().includes(value))
-      .map(item => ({
-        ...item,
-        color: itemTypes.find(type => type.value === item.itemType)?.color
-      }))
+    if (!value) return list
+
+    const filteredItems = fuse.search(value).map(el => el.item)
+
+    return filteredItems
   }
 
   const loginOnClick = async () => {

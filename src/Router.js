@@ -24,6 +24,7 @@ const router = createBrowserRouter(createRoutesFromElements(
         <CreatePage />
       </RequireAuth>
     } />
+    <Route path="/create/test" element={<CreatePage />} />
     <Route path="/error-user" element={<ErrorUserPage />} />
     <Route path="/error" element={<ErrorPage />} />
     <Route path="*" element={<ErrorPage />} />

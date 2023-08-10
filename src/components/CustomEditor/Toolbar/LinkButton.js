@@ -3,6 +3,7 @@ import classNames from "classnames"
 import PropTypes from "prop-types"
 import { useSelector } from "react-redux"
 import { EditorState, RichUtils } from "draft-js"
+import Fuse from "fuse.js";
 
 import Input from "../../Input/Input"
 
@@ -21,6 +22,22 @@ const LinkButton = ({
   const linkButtonRef = createRef()
 
   const onlyDefinitionsList = useSelector((state) => state.list.onlyDefinitionsData)
+
+  const fuseOptions = {
+    includeScore: true,
+    keys: [
+      "searchTags"
+    ]
+  }
+  const fuse = new Fuse(onlyDefinitionsList, fuseOptions)
+
+  const filteredList = () => {
+    if (!value) return onlyDefinitionsList
+
+    const filteredItems = fuse.search(value).map(el => el.item)
+
+    return filteredItems
+  }
 
   const onClickBlockButton = () => {
     const rects = linkButtonRef.current.getBoundingClientRect()
@@ -107,7 +124,7 @@ const LinkButton = ({
         {!warn && <Input
           value={value}
           setValue={e => setValue(e)}
-          list={onlyDefinitionsList}
+          list={filteredList()}
           listItemContent='searchTags'
           oneLineItem
           handleClickOnList={handleClickOnList}

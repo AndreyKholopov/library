@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { EditorState, convertToRaw } from "draft-js";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { stateToHTML } from "draft-js-export-html";
 
 import Card from "../components/Card/Card";
@@ -26,6 +26,8 @@ function CreatePage() {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
+  const isTest = location.pathname.includes('test')
 
   const handleEditorState = (state) => {
     setEditorState(state)
@@ -109,12 +111,14 @@ function CreatePage() {
         disabled={load}
       />
 
-      <Button
-        className='ml-auto'
-        onClick={handleSubmit}
-      >
-        Сохранить
-      </Button>
+      {!isTest &&
+        <Button
+          className='ml-auto'
+          onClick={handleSubmit}
+        >
+          Сохранить
+        </Button>
+      }
     </Card>
   );
 }

@@ -29,11 +29,14 @@ function Layout() {
       "searchTags"
     ]
   }
-  const fuse = new Fuse(list, fuseOptions);
+  const fuse = new Fuse(list, fuseOptions)
 
   const addButtonLocationsNotVisible = [
-    '/create'
+    '/create',
+    '/edit'
   ]
+
+  const isVisible = !addButtonLocationsNotVisible.find((el) => location.pathname.includes(el))
 
   useEffect(() => {
     dispatch(setLoadList(true))
@@ -90,16 +93,17 @@ function Layout() {
         <Outlet />
       </main>
 
-      <Button
-        round
-        visible={!addButtonLocationsNotVisible.find((el) => el === location.pathname)}
-        width={75}
-        fontSize='2.5rem'
-        className={addButtonClass}
-        onClick={loginOnClick}
-      >
-        +
-      </Button>
+      {isVisible &&
+        <Button
+          round
+          width={75}
+          fontSize='2.5rem'
+          className={addButtonClass}
+          onClick={loginOnClick}
+        >
+          +
+        </Button>
+      }
     </>
   );
 }

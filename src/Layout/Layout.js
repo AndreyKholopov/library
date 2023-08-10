@@ -54,7 +54,7 @@ function Layout() {
   }
 
   const loginOnClick = async () => {
-    if (checkUser) navigate('/create')
+    if (checkUser()) navigate('/create')
 
     else {
       const res = await loginUser()

@@ -36,7 +36,7 @@ function ItemPage() {
   }, [params.id])
 
   const handleClick = async () => {
-    if (checkUser) navigate(`/${params.id}/edit`)
+    if (checkUser()) navigate(`/${params.id}/edit`)
 
     else {
       const res = await loginUser()

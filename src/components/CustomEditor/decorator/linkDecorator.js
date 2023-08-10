@@ -16,7 +16,7 @@ const findLinkEntities = (contentBlock, callback, contentState) => {
 const Link = (props) => {
   const { href } = props.contentState.getEntity(props.entityKey).getData()
   return (
-    <a href={href} style={{
+    <a href={'/' + href} style={{
       color: '#3b5998',
       textDecoration: 'underline'
     }}>

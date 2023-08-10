@@ -31,8 +31,10 @@ export const listSlice = createSlice({
       if (data.itemType === 'definition') state.onlyDefinitionsData.push(action.payload)
     },
     updateItemInList: (state, action) => {
-      action.payload.color = ITEM_TYPES.find(type => type.value === action.payload.itemType)?.color
-      const data = action.payload
+      const data = {
+        ...action.payload,
+        color: ITEM_TYPES.find(type => type.value === action.payload.itemType)?.color
+      }
 
       state.data = state.data.map(el => el.id === data.id ? data : el)
       if (data.itemType === 'definition') state.onlyDefinitionsData = state.onlyDefinitionsData.map(el => el.id === action.payload.id ? action.payload : el)

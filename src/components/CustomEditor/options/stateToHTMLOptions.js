@@ -4,13 +4,18 @@ const stateToHTMLOptions = {
 
     if (entityType === 'IMAGE') {
       const data = entity.getData()
+      const width = data.width
+        ? Number.isInteger(data.width)
+          ? data.width + '%'
+          : data.width.slice(0, -1) + '%'
+        : '40%'
 
       return {
         element: 'img',
         attributes: {
           src: data.src,
           height: 'auto',
-          width: data.width ? data.width + '%' : '40%'
+          width
         }
       }
     } else if (entityType === 'LINK') {

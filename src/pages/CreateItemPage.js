@@ -13,7 +13,7 @@ import stateToHTMLOptions from "../components/CustomEditor/options/stateToHTMLOp
 import updateList from "../api/updateList";
 import saveItem from "../api/saveItem";
 import { addItemToList } from "../store/slices/listSlice";
-import { setLoadItem } from "../store/slices/itemSlice";
+import { setItem, setLoadItem } from "../store/slices/itemSlice";
 
 function CreatePage() {
   const load = useSelector((state) => state.item.load)
@@ -67,6 +67,7 @@ function CreatePage() {
       await updateList(listItem, newItem.id)
 
       dispatch(addItemToList({ ...listItem, id: newItem.id }))
+      dispatch(setItem({ ...item, id: newItem.id }))
       dispatch(setLoadItem(false))
 
       navigate(`/${newItem.id}`)

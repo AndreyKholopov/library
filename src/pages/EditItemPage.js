@@ -81,6 +81,7 @@ function EditPage() {
       await updateList(listItem, item.id)
 
       dispatch(updateItemInList({ ...listItem, id: item.id }))
+      dispatch(setItem({ ...item, id: newItem.id }))
       dispatch(setLoadItem(false))
 
       navigate(`/${item.id}`)

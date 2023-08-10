@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import itemTypes from '../../constants/itemTypes'
+import ITEM_TYPES from '../../constants/ITEM_TYPES'
 
 export const listSlice = createSlice({
   name: 'list',
@@ -12,11 +12,11 @@ export const listSlice = createSlice({
     setList: (state, action) => {
       const data = action.payload.map(el => ({
         ...el,
-        color: itemTypes.find(type => type.value === el.itemType)?.color
+        color: ITEM_TYPES.find(type => type.value === el.itemType)?.color
       }))
 
       state.data = data
-      state.onlyDefinitionsData = data.filter(el => el.itemType === 'definition')
+      state.onlyDefinitionsData = action.payload.filter(el => el.itemType === 'definition')
     },
     setLoadList: (state, action) => {
       state.load = action.payload
@@ -24,18 +24,18 @@ export const listSlice = createSlice({
     addItemToList: (state, action) => {
       const data = {
         ...action.payload,
-        color: itemTypes.find(type => type.value === action.payload.itemType)?.color
+        color: ITEM_TYPES.find(type => type.value === action.payload.itemType)?.color
       }
 
       state.data.push(data)
-      if (data.itemType === 'definition') state.onlyDefinitionsData.push(data)
+      if (data.itemType === 'definition') state.onlyDefinitionsData.push(action.payload)
     },
     updateItemInList: (state, action) => {
-      action.payload.color = itemTypes.find(type => type.value === action.payload.itemType)?.color
+      action.payload.color = ITEM_TYPES.find(type => type.value === action.payload.itemType)?.color
       const data = action.payload
 
       state.data = state.data.map(el => el.id === data.id ? data : el)
-      if (data.itemType === 'definition') state.onlyDefinitionsData = state.data.map(el => el.id === data.id ? data : el)
+      if (data.itemType === 'definition') state.onlyDefinitionsData = state.onlyDefinitionsData.map(el => el.id === action.payload.id ? action.payload : el)
     },
   },
 })

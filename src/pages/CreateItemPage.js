@@ -8,7 +8,7 @@ import Card from "../components/Card/Card";
 import Editor from "../components/CustomEditor/CustomEditor"
 import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
-import itemTypes from "../constants/itemTypes"
+import ITEM_TYPES from "../constants/ITEM_TYPES"
 import stateToHTMLOptions from "../components/CustomEditor/options/stateToHTMLOptions";
 import updateList from "../api/updateList";
 import saveItem from "../api/saveItem";
@@ -86,7 +86,7 @@ function CreatePage() {
         value={itemType}
         setValue={setItemType}
         className='mb-16'
-        list={itemTypes}
+        list={ITEM_TYPES}
         isSelect
         label="Тип заметки"
         radiusSize="16px"

@@ -1,4 +1,4 @@
-const itemTypes = [
+const ITEM_TYPES = [
   {
     value: 'note',
     name: 'Заметка',
@@ -16,4 +16,4 @@ const itemTypes = [
   }
 ]
 
-export default itemTypes
+export default ITEM_TYPES

@@ -13,6 +13,15 @@ const stateToHTMLOptions = {
           width: data.width ? data.width + '%' : '40%'
         }
       }
+    } else if (entityType === 'LINK') {
+      const data = entity.getData()
+
+      return {
+        element: 'a',
+        attributes: {
+          href: data.href,
+        }
+      }
     }
   },
   blockStyleFn: (block) => {

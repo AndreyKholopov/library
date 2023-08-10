@@ -10,7 +10,7 @@ import checkUser from "../api/checkUser";
 import loginUser from "../api/loginUser";
 import { setItem, setLoadItem } from "../store/slices/itemSlice";
 import { setAccessToken, setUserUid } from "../store/slices/userSlice";
-import itemTypes from "../constants/itemTypes";
+import ITEM_TYPES from "../constants/ITEM_TYPES";
 
 function ItemPage() {
   const dispatch = useDispatch()
@@ -58,7 +58,7 @@ function ItemPage() {
       {load && <h3 className={classes}>Подождите, идет загрузка заметки</h3>}
       {!load &&
         <>
-          <h3 className='item-type'>{itemTypes?.find(el => el.value === item.itemType)?.name}</h3>
+          <h3 className='item-type'>{ITEM_TYPES?.find(el => el.value === item.itemType)?.name}</h3>
           <div dangerouslySetInnerHTML={{ __html: item.info }} />
         </>
       }

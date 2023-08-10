@@ -9,7 +9,7 @@ import Editor from "../components/CustomEditor/CustomEditor"
 import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
 import stateToHTMLOptions from "../components/CustomEditor/options/stateToHTMLOptions";
-import itemTypes from "../constants/itemTypes"
+import ITEM_TYPES from "../constants/ITEM_TYPES"
 import updateList from "../api/updateList";
 import updateItem from "../api/updateItem";
 import loadItem from "../api/loadItem";
@@ -102,7 +102,7 @@ function EditPage() {
         value={itemType}
         setValue={setItemType}
         className='mb-16'
-        list={itemTypes}
+        list={ITEM_TYPES}
         isSelect
         label="Тип заметки"
         radiusSize="16px"

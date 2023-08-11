@@ -16,6 +16,7 @@ const LinkButton = ({
 }) => {
   const [active, setActive] = useState(false)
   const [warn, setWarn] = useState(false)
+  const [focusInput, setFocusInput] = useState(false)
   const [value, setValue] = useState('')
   const [coordinates, setCoordinates] = useState({ top: '0px', left: '0px' })
 
@@ -43,6 +44,7 @@ const LinkButton = ({
     const rects = linkButtonRef.current.getBoundingClientRect()
 
     setWarn(false)
+    setFocusInput(false)
     setActive(!active)
 
     if (!active) {
@@ -60,6 +62,7 @@ const LinkButton = ({
         const blockWithLinkAtBeginning = contentState.getBlockForKey(startKey)
         const linkKey = blockWithLinkAtBeginning.getEntityAt(startOffset)
         setValue('')
+        setFocusInput(true)
         if (linkKey) {
           const linkInstance = contentState.getEntity(linkKey)
           const linkId = linkInstance.getData().href
@@ -123,6 +126,7 @@ const LinkButton = ({
         {warn && <span>Выделите ссылку</span>}
         {!warn && <Input
           value={value}
+          focusInput={focusInput}
           setValue={e => setValue(e)}
           list={filteredList()}
           listItemContent='searchTags'

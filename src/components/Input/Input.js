@@ -24,10 +24,12 @@ const Input = ({
   handleClickOnList,
   oneLineItem,
   hideLabelIfActive,
+  focusInput,
   ...attrs
 }) => {
   const [active, setActive] = useState(false)
   const [showValue, setShowValue] = useState('')
+  const wrapperRef = useRef(null)
   const inputRef = useRef(null)
 
   useEffect(() => {
@@ -36,7 +38,11 @@ const Input = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
 
-  useClickOutside(inputRef, () => setActive(false))
+  useEffect(() => {
+    if (focusInput) inputRef.current.focus()
+  }, [focusInput])
+
+  useClickOutside(wrapperRef, () => setActive(false))
 
   const classes = classNames(
     className,
@@ -67,10 +73,11 @@ const Input = ({
     <div
       className={classes}
       style={dynamicStyles}
-      ref={inputRef}
+      ref={wrapperRef}
     >
       <label>
         <input
+          ref={inputRef}
           className={classesField}
           type="text"
           placeholder=" "

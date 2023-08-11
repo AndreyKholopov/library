@@ -37,7 +37,7 @@ export const listSlice = createSlice({
       }
 
       state.data = state.data.map(el => el.id === data.id ? data : el)
-      if (data.itemType === 'definition') state.onlyDefinitionsData = state.onlyDefinitionsData.map(el => el.id === action.payload.id ? action.payload : el)
+      if (data.itemType === 'definition') state.onlyDefinitionsData = state.data.map(el => el.id === action.payload.id ? action.payload : el)
     },
   },
 })

@@ -4,7 +4,7 @@ export const ItemSlice = createSlice({
   name: 'list',
   initialState: {
     data: {},
-    load: false
+    load: false,
   },
   reducers: {
     setItem: (state, action) => {
@@ -12,7 +12,7 @@ export const ItemSlice = createSlice({
     },
     setLoadItem: (state, action) => {
       state.load = action.payload
-    }
+    },
   },
 })
 

@@ -1,18 +1,18 @@
-import classNames from "classnames"
-import Editor, { composeDecorators } from "@draft-js-plugins/editor"
-import createImagePlugin from "@draft-js-plugins/image"
+import classNames from 'classnames'
+import Editor, { composeDecorators } from '@draft-js-plugins/editor'
+import createImagePlugin from '@draft-js-plugins/image'
 import '@draft-js-plugins/image/lib/plugin.css'
 import createFocusPlugin from '@draft-js-plugins/focus'
 import '@draft-js-plugins/focus/lib/plugin.css'
 import createResizeablePlugin from '@draft-js-plugins/resizeable'
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types'
 
-import Toolbar from "./Toolbar/Toolbar"
-import createDndFilePlugin from "./plugins/dndFiles"
-import createCodeStyle from "./plugins/codeStyle"
-import decorator from "./decorator/linkDecorator"
-import "./CustomEditor.scss"
-import { EditorState } from "draft-js"
+import Toolbar from './Toolbar/Toolbar'
+import createDndFilePlugin from './plugins/dndFiles'
+import createCodeStyle from './plugins/codeStyle'
+import decorator from './decorator/linkDecorator'
+import './CustomEditor.scss'
+import { EditorState } from 'draft-js'
 
 const resizeablePlugin = createResizeablePlugin()
 const focusPlugin = createFocusPlugin()
@@ -32,14 +32,14 @@ const CustomEditor = ({
   radiusSize,
   editorState,
   onChange,
-  disabled
+  disabled,
 }) => {
   const plugins = [
     focusPlugin,
     resizeablePlugin,
     imagePlugin,
     dndFilePlugin,
-    codeStyle
+    codeStyle,
   ]
 
   const dynamicStyles = {
@@ -55,10 +55,7 @@ const CustomEditor = ({
 
   return (
     <>
-      <div
-        className={editorClass}
-        style={dynamicStyles}
-      >
+      <div className={editorClass} style={dynamicStyles}>
         <Toolbar
           editorState={editorState}
           onChange={onChange}
@@ -67,7 +64,7 @@ const CustomEditor = ({
 
         <Editor
           editorState={editorState}
-          onChange={(state) => onChange(EditorState.set(state, {decorator}))}
+          onChange={(state) => onChange(EditorState.set(state, { decorator }))}
           plugins={plugins}
           spellCheck={true}
           tabIndex={disabled ? -1 : 0}
@@ -83,14 +80,14 @@ CustomEditor.propTypes = {
   radiusSize: PropTypes.string,
   editorState: PropTypes.object,
   onChange: PropTypes.func,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
 }
 
 CustomEditor.defaultProps = {
   className: '',
   borderColor: '#212121',
   radiusSize: '16px',
-  disabled: false
+  disabled: false,
 }
 
-export default CustomEditor;
+export default CustomEditor

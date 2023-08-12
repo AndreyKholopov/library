@@ -1,18 +1,12 @@
-import { useState } from "react"
-import classNames from "classnames"
-import { AtomicBlockUtils, EditorState } from "draft-js"
-import PropTypes from "prop-types"
-import { createRef } from "react"
+import { useState } from 'react'
+import classNames from 'classnames'
+import { AtomicBlockUtils, EditorState } from 'draft-js'
+import PropTypes from 'prop-types'
+import { createRef } from 'react'
 
-import toBase64 from "../../../api/toBase64"
+import toBase64 from '../../../api/toBase64'
 
-const ImageButton = ({
-  setting,
-  render,
-  editorState,
-  onChange,
-  ...attrs
-}) => {
+const ImageButton = ({ setting, render, editorState, onChange, ...attrs }) => {
   const [active, setActive] = useState(false)
   const [drag, setDrag] = useState(false)
   const [warn, setWarn] = useState(false)
@@ -27,39 +21,39 @@ const ImageButton = ({
     setActive(!active)
     setCoordinates({
       top: rects.bottom + 5 + 'px',
-      left: rects.left + 'px'
+      left: rects.left + 'px',
     })
 
     setDrag(false)
     setWarn(false)
   }
 
-  const dragStartHandler = e => {
+  const dragStartHandler = (e) => {
     e.preventDefault()
     setDrag(true)
     setWarn(false)
   }
 
-  const dragLeaveHandler = e => {
+  const dragLeaveHandler = (e) => {
     e.preventDefault()
     setDrag(false)
   }
 
-  const onDropHandler = e => {
+  const onDropHandler = (e) => {
     e.preventDefault()
     const file = e.dataTransfer.files[0]
 
     loadImage(file)
   }
 
-  const onClickHandler = e => {
+  const onClickHandler = (e) => {
     e.preventDefault()
-    let file = e.target.files[0];
+    let file = e.target.files[0]
 
     loadImage(file)
   }
 
-  const loadImage = async file => {
+  const loadImage = async (file) => {
     if (!file.type.includes('image')) {
       setDrag(false)
       setWarn(true)
@@ -78,16 +72,20 @@ const ImageButton = ({
     const contentState = editorState.getCurrentContent()
     const contentStateWithEntity = contentState.createEntity(
       setting,
-      "IMMUTABLE",
+      'IMMUTABLE',
       { src: base64 }
     )
 
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey()
     const newEditorState = EditorState.set(editorState, {
-      currentContent: contentStateWithEntity
+      currentContent: contentStateWithEntity,
     })
 
-    return AtomicBlockUtils.insertAtomicBlock(newEditorState, entityKey, base64.slice(-5))
+    return AtomicBlockUtils.insertAtomicBlock(
+      newEditorState,
+      entityKey,
+      base64.slice(-5)
+    )
   }
 
   const toolbarButtonsClass = classNames(
@@ -112,10 +110,7 @@ const ImageButton = ({
       >
         {render}
       </button>
-      <div
-        className={toolbarPopoutClass}
-        style={coordinates}
-      >
+      <div className={toolbarPopoutClass} style={coordinates}>
         <input
           ref={imageInputRef}
           className="hidden"
@@ -125,25 +120,27 @@ const ImageButton = ({
           onChange={(e) => onClickHandler(e)}
         />
 
-        {drag
-          ? <div
+        {drag ? (
+          <div
             className="editor__toolbar-drop-area editor__toolbar-drop-area_active"
-            onDragStart={e => dragStartHandler(e)}
-            onDragLeave={e => dragLeaveHandler(e)}
-            onDragOver={e => dragStartHandler(e)}
-            onDrop={e => onDropHandler(e)}
+            onDragStart={(e) => dragStartHandler(e)}
+            onDragLeave={(e) => dragLeaveHandler(e)}
+            onDragOver={(e) => dragStartHandler(e)}
+            onDrop={(e) => onDropHandler(e)}
           >
             +
           </div>
-          : <div
+        ) : (
+          <div
             className="editor__toolbar-drop-area"
-            onDragStart={e => dragStartHandler(e)}
-            onDragLeave={e => dragLeaveHandler(e)}
-            onDragOver={e => dragStartHandler(e)}
+            onDragStart={(e) => dragStartHandler(e)}
+            onDragLeave={(e) => dragLeaveHandler(e)}
+            onDragOver={(e) => dragStartHandler(e)}
             onClick={() => imageInputRef.current.click()}
           >
             {warn ? 'Это не изображение' : '+'}
-          </div>}
+          </div>
+        )}
       </div>
     </>
   )

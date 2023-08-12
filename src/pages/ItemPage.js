@@ -1,16 +1,16 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import classNames from "classnames"
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
+import classNames from 'classnames'
 
-import Card from "../components/Card/Card";
-import Button from "../components/Button/Button";
-import loadItem from "../api/loadItem";
-import checkUser from "../api/checkUser";
-import loginUser from "../api/loginUser";
-import { setItem, setLoadItem } from "../store/slices/itemSlice";
-import { setAccessToken, setUserUid } from "../store/slices/userSlice";
-import ITEM_TYPES from "../constants/ITEM_TYPES";
+import Card from '../components/Card/Card'
+import Button from '../components/Button/Button'
+import loadItem from '../api/loadItem'
+import checkUser from '../api/checkUser'
+import loginUser from '../api/loginUser'
+import { setItem, setLoadItem } from '../store/slices/itemSlice'
+import { setAccessToken, setUserUid } from '../store/slices/userSlice'
+import ITEM_TYPES from '../constants/ITEM_TYPES'
 
 function ItemPage() {
   const dispatch = useDispatch()
@@ -22,7 +22,7 @@ function ItemPage() {
   useEffect(() => {
     if (item?.id !== params.id) {
       dispatch(setLoadItem(true))
-      loadItem(params.id).then(response => {
+      loadItem(params.id).then((response) => {
         if (response) {
           dispatch(setItem(response))
           dispatch(setLoadItem(false))
@@ -37,7 +37,6 @@ function ItemPage() {
 
   const handleClick = async () => {
     if (checkUser()) navigate(`/${params.id}/edit`)
-
     else {
       const res = await loginUser()
 
@@ -49,28 +48,25 @@ function ItemPage() {
     }
   }
 
-  const classes = classNames(
-    'announcement'
-  )
+  const classes = classNames('announcement')
 
   return (
     <Card height="auto">
       {load && <h3 className={classes}>Подождите, идет загрузка заметки</h3>}
-      {!load &&
+      {!load && (
         <>
-          <h3 className='item-type'>{ITEM_TYPES?.find(el => el.value === item.itemType)?.name}</h3>
+          <h3 className="item-type">
+            {ITEM_TYPES?.find((el) => el.value === item.itemType)?.name}
+          </h3>
           <div dangerouslySetInnerHTML={{ __html: item.info }} />
         </>
-      }
+      )}
 
-      <Button
-        className='ml-auto mt-16'
-        onClick={handleClick}
-      >
+      <Button className="ml-auto mt-16" onClick={handleClick}>
         Редактировать
       </Button>
     </Card>
-  );
+  )
 }
 
-export default ItemPage;
+export default ItemPage

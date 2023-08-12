@@ -1,14 +1,8 @@
-import classNames from "classnames"
-import { RichUtils } from "draft-js"
-import PropTypes from "prop-types"
+import classNames from 'classnames'
+import { RichUtils } from 'draft-js'
+import PropTypes from 'prop-types'
 
-const StyleButton = ({
-  setting,
-  render,
-  editorState,
-  onChange,
-  ...attrs
-}) => {
+const StyleButton = ({ setting, render, editorState, onChange, ...attrs }) => {
   const onClickStylesButton = (style) => {
     onChange(RichUtils.toggleInlineStyle(editorState, style))
   }
@@ -40,7 +34,7 @@ StyleButton.propTypes = {
     'CODE',
     'ITALIC',
     'STRIKETHROUGH',
-    'UNDERLINE'
+    'UNDERLINE',
   ]),
   render: PropTypes.object,
   editorState: PropTypes.object,

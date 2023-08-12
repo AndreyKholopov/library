@@ -1,6 +1,6 @@
-import React from "react"
-import PropTypes from "prop-types"
-import classNames from "classnames"
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import './Card.scss'
 
@@ -15,11 +15,7 @@ const Card = ({
   overflow,
   ...attrs
 }) => {
-
-  const classes = classNames(
-    className,
-    'card'
-  )
+  const classes = classNames(className, 'card')
 
   const dynamicStyles = {
     background: backgroundColor,
@@ -29,15 +25,11 @@ const Card = ({
     width: !isNaN(width) ? width + 'px' : width,
     height: !isNaN(height) ? height + 'px' : height,
 
-    overflow: overflow
+    overflow: overflow,
   }
 
   return (
-    <div
-      className={classes}
-      style={dynamicStyles}
-      {...attrs}
-    >
+    <div className={classes} style={dynamicStyles} {...attrs}>
       {children}
     </div>
   )
@@ -49,14 +41,8 @@ Card.propTypes = {
   borderColor: PropTypes.string,
   radiusSize: PropTypes.string,
   overflow: PropTypes.string,
-  width: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  height: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 Card.defaultProps = {
@@ -66,7 +52,7 @@ Card.defaultProps = {
   radiusSize: '16px',
   overflow: '',
   width: '100%',
-  height: 100
+  height: 100,
 }
 
 export default Card

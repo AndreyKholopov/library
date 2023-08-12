@@ -6,17 +6,19 @@ export const listSlice = createSlice({
   initialState: {
     data: [],
     onlyDefinitionsData: [],
-    load: false
+    load: false,
   },
   reducers: {
     setList: (state, action) => {
-      const data = action.payload.map(el => ({
+      const data = action.payload.map((el) => ({
         ...el,
-        color: ITEM_TYPES.find(type => type.value === el.itemType)?.color
+        color: ITEM_TYPES.find((type) => type.value === el.itemType)?.color,
       }))
 
       state.data = data
-      state.onlyDefinitionsData = action.payload.filter(el => el.itemType === 'definition')
+      state.onlyDefinitionsData = action.payload.filter(
+        (el) => el.itemType === 'definition'
+      )
     },
     setLoadList: (state, action) => {
       state.load = action.payload
@@ -24,24 +26,31 @@ export const listSlice = createSlice({
     addItemToList: (state, action) => {
       const data = {
         ...action.payload,
-        color: ITEM_TYPES.find(type => type.value === action.payload.itemType)?.color
+        color: ITEM_TYPES.find((type) => type.value === action.payload.itemType)
+          ?.color,
       }
 
       state.data.push(data)
-      if (data.itemType === 'definition') state.onlyDefinitionsData.push(action.payload)
+      if (data.itemType === 'definition')
+        state.onlyDefinitionsData.push(action.payload)
     },
     updateItemInList: (state, action) => {
       const data = {
         ...action.payload,
-        color: ITEM_TYPES.find(type => type.value === action.payload.itemType)?.color
+        color: ITEM_TYPES.find((type) => type.value === action.payload.itemType)
+          ?.color,
       }
 
-      state.data = state.data.map(el => el.id === data.id ? data : el)
-      if (data.itemType === 'definition') state.onlyDefinitionsData = state.data.map(el => el.id === action.payload.id ? action.payload : el)
+      state.data = state.data.map((el) => (el.id === data.id ? data : el))
+      if (data.itemType === 'definition')
+        state.onlyDefinitionsData = state.data.map((el) =>
+          el.id === action.payload.id ? action.payload : el
+        )
     },
   },
 })
 
-export const { setList, setLoadList, addItemToList, updateItemInList } = listSlice.actions
+export const { setList, setLoadList, addItemToList, updateItemInList } =
+  listSlice.actions
 
 export default listSlice.reducer

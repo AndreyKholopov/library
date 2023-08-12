@@ -15,8 +15,8 @@ const stateToHTMLOptions = {
         attributes: {
           src: data.src,
           height: 'auto',
-          width
-        }
+          width,
+        },
       }
     } else if (entityType === 'LINK') {
       const data = entity.getData()
@@ -25,7 +25,7 @@ const stateToHTMLOptions = {
         element: 'a',
         attributes: {
           href: data.href,
-        }
+        },
       }
     }
   },
@@ -38,24 +38,24 @@ const stateToHTMLOptions = {
       if (data['code-block__start'] && data['code-block__end']) {
         return {
           attributes: {
-            class: "code-block__start code-block__end"
-          }
+            class: 'code-block__start code-block__end',
+          },
         }
       } else if (data['code-block__start']) {
         return {
           attributes: {
-            class: "code-block__start"
-          }
+            class: 'code-block__start',
+          },
         }
       } else if (data['code-block__end']) {
         return {
           attributes: {
-            class: "code-block__end"
-          }
+            class: 'code-block__end',
+          },
         }
       }
     }
-  }
+  },
 }
 
 export default stateToHTMLOptions

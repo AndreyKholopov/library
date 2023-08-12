@@ -1,14 +1,8 @@
-import classNames from "classnames"
-import { RichUtils } from "draft-js"
-import PropTypes from "prop-types"
+import classNames from 'classnames'
+import { RichUtils } from 'draft-js'
+import PropTypes from 'prop-types'
 
-const BlockButton = ({
-  setting,
-  render,
-  editorState,
-  onChange,
-  ...attrs
-}) => {
+const BlockButton = ({ setting, render, editorState, onChange, ...attrs }) => {
   const selection = editorState.getSelection()
 
   const onClickBlockButton = (style) => {

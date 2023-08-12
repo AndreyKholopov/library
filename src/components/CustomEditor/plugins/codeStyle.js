@@ -1,10 +1,7 @@
-const blockStyleFn = (
-  block,
-  { getEditorState }
-  ) => {
+const blockStyleFn = (block, { getEditorState }) => {
   const type = block.getType()
 
-  if (type === "code-block") {
+  if (type === 'code-block') {
     const key = block.getKey()
     const editorState = getEditorState()
     const contentState = editorState.getCurrentContent()
@@ -12,35 +9,35 @@ const blockStyleFn = (
     const nextBlockType = contentState.getBlockAfter(key)?.getType()
 
     block.codeBlock = {
-      "code-block__start": false,
-      "code-block__end": false
+      'code-block__start': false,
+      'code-block__end': false,
     }
 
-    if (previousBlockType !== "code-block" && nextBlockType !== "code-block") {
+    if (previousBlockType !== 'code-block' && nextBlockType !== 'code-block') {
       block.codeBlock = {
-        "code-block__start": true,
-        "code-block__end": true
+        'code-block__start': true,
+        'code-block__end': true,
       }
 
-      return "code-block__start code-block__end"
-    } else if (previousBlockType !== "code-block") {
+      return 'code-block__start code-block__end'
+    } else if (previousBlockType !== 'code-block') {
       block.codeBlock = {
-        "code-block__start": true,
+        'code-block__start': true,
       }
 
-      return "code-block__start"
-    } else if (nextBlockType !== "code-block") {
+      return 'code-block__start'
+    } else if (nextBlockType !== 'code-block') {
       block.codeBlock = {
-        "code-block__end": true
+        'code-block__end': true,
       }
 
-      return "code-block__end"
+      return 'code-block__end'
     }
   }
 }
 
 const createCodeStyle = () => ({
-  blockStyleFn
+  blockStyleFn,
 })
 
 export default createCodeStyle

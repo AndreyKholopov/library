@@ -1,6 +1,6 @@
-import { AtomicBlockUtils } from "draft-js"
+import { AtomicBlockUtils } from 'draft-js'
 
-import toBase64 from "../../../api/toBase64"
+import toBase64 from '../../../api/toBase64'
 
 const handleDroppedFiles = async (
   selection,
@@ -10,14 +10,22 @@ const handleDroppedFiles = async (
   const editorState = getEditorState()
   const result = await toBase64(files[0])
   const contentState = editorState.getCurrentContent()
-  const atomicBlock = contentState.getBlocksAsArray().filter(el => el.text === result.slice(-5))
+  const atomicBlock = contentState
+    .getBlocksAsArray()
+    .filter((el) => el.text === result.slice(-5))
 
   try {
-    if (!atomicBlock.length) throw new Error('Используйте вставку изображений с помощью тулбара')
+    if (!atomicBlock.length)
+      throw new Error('Используйте вставку изображений с помощью тулбара')
 
-    if (atomicBlock[0].getKey() === selection.getStartKey()) throw new Error('Ошибка: нельзя перетащить изображение на то же место')
+    if (atomicBlock[0].getKey() === selection.getStartKey())
+      throw new Error('Ошибка: нельзя перетащить изображение на то же место')
 
-    const newState = AtomicBlockUtils.moveAtomicBlock(editorState, atomicBlock[0], selection)
+    const newState = AtomicBlockUtils.moveAtomicBlock(
+      editorState,
+      atomicBlock[0],
+      selection
+    )
 
     setEditorState(newState)
   } catch (error) {
@@ -26,7 +34,7 @@ const handleDroppedFiles = async (
 }
 
 const createDndFilePlugin = () => ({
-  handleDroppedFiles
+  handleDroppedFiles,
 })
 
 export default createDndFilePlugin

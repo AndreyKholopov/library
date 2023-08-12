@@ -4,16 +4,16 @@ export const userSlice = createSlice({
   name: 'user',
   initialState: {
     userUid: '',
-    accessToken: ''
+    accessToken: '',
   },
   reducers: {
     setUserUid: (state, action) => {
       state.userUid = action.payload
-      localStorage.setItem('userUid', action.payload);
+      localStorage.setItem('userUid', action.payload)
     },
     setAccessToken: (state, action) => {
       state.accessToken = action.payload
-    }
+    },
   },
 })
 

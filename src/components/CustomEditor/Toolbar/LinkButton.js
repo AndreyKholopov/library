@@ -1,19 +1,13 @@
-import { useState, createRef } from "react"
-import classNames from "classnames"
-import PropTypes from "prop-types"
-import { useSelector } from "react-redux"
-import { EditorState, RichUtils } from "draft-js"
-import Fuse from "fuse.js";
+import { useState, createRef } from 'react'
+import classNames from 'classnames'
+import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
+import { EditorState, RichUtils } from 'draft-js'
+import Fuse from 'fuse.js'
 
-import Input from "../../Input/Input"
+import Input from '../../Input/Input'
 
-const LinkButton = ({
-  setting,
-  render,
-  editorState,
-  onChange,
-  ...attrs
-}) => {
+const LinkButton = ({ setting, render, editorState, onChange, ...attrs }) => {
   const [active, setActive] = useState(false)
   const [warn, setWarn] = useState(false)
   const [focusInput, setFocusInput] = useState(false)
@@ -22,20 +16,20 @@ const LinkButton = ({
 
   const linkButtonRef = createRef()
 
-  const onlyDefinitionsList = useSelector((state) => state.list.onlyDefinitionsData)
+  const onlyDefinitionsList = useSelector(
+    (state) => state.list.onlyDefinitionsData
+  )
 
   const fuseOptions = {
     includeScore: true,
-    keys: [
-      "searchTags"
-    ]
+    keys: ['searchTags'],
   }
   const fuse = new Fuse(onlyDefinitionsList, fuseOptions)
 
   const filteredList = () => {
     if (!value) return onlyDefinitionsList
 
-    const filteredItems = fuse.search(value).map(el => el.item)
+    const filteredItems = fuse.search(value).map((el) => el.item)
 
     return filteredItems
   }
@@ -50,7 +44,7 @@ const LinkButton = ({
     if (!active) {
       setCoordinates({
         top: rects.bottom + 5 + 'px',
-        left: rects.left + 'px'
+        left: rects.left + 'px',
       })
 
       const selection = editorState.getSelection()
@@ -66,7 +60,9 @@ const LinkButton = ({
         if (linkKey) {
           const linkInstance = contentState.getEntity(linkKey)
           const linkId = linkInstance.getData().href
-          setValue(onlyDefinitionsList.find(el => el.id === linkId).searchTags)
+          setValue(
+            onlyDefinitionsList.find((el) => el.id === linkId).searchTags
+          )
           setActive(true)
         }
       }
@@ -75,7 +71,7 @@ const LinkButton = ({
 
   const handleClickOnList = (el) => {
     setValue(el.searchTags)
-    
+
     const contentState = editorState.getCurrentContent()
     const contentStateWithEntity = contentState.createEntity(
       setting,
@@ -85,9 +81,9 @@ const LinkButton = ({
 
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey()
 
-    let newEditorState = EditorState.set(editorState,
-      { currentContent: contentStateWithEntity }
-    )
+    let newEditorState = EditorState.set(editorState, {
+      currentContent: contentStateWithEntity,
+    })
     newEditorState = RichUtils.toggleLink(
       newEditorState,
       newEditorState.getSelection(),
@@ -119,23 +115,22 @@ const LinkButton = ({
       >
         {render}
       </button>
-      <div
-        className={toolbarPopoutClass}
-        style={coordinates}
-      >
+      <div className={toolbarPopoutClass} style={coordinates}>
         {warn && <span>Выделите ссылку</span>}
-        {!warn && <Input
-          value={value}
-          focusInput={focusInput}
-          setValue={e => setValue(e)}
-          list={filteredList()}
-          listItemContent='searchTags'
-          oneLineItem
-          handleClickOnList={handleClickOnList}
-          label="Определения"
-          hideLabelIfActive
-          radiusSize="16px"
-        />}
+        {!warn && (
+          <Input
+            value={value}
+            focusInput={focusInput}
+            setValue={(e) => setValue(e)}
+            list={filteredList()}
+            listItemContent="searchTags"
+            oneLineItem
+            handleClickOnList={handleClickOnList}
+            label="Определения"
+            hideLabelIfActive
+            radiusSize="16px"
+          />
+        )}
       </div>
     </>
   )

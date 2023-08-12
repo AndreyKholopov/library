@@ -1,6 +1,6 @@
-import React from "react"
-import PropTypes from "prop-types"
-import classNames from "classnames"
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
 import './Button.scss'
 
@@ -18,12 +18,7 @@ const Button = ({
   visible,
   ...attrs
 }) => {
-
-  const classes = classNames(
-    className,
-    'button',
-    round && 'button__round'
-  )
+  const classes = classNames(className, 'button', round && 'button__round')
 
   const dynamicStyles = {
     '--color-background': backgroundColor,
@@ -34,15 +29,11 @@ const Button = ({
     '--font-size': fontSize,
     '--width': !isNaN(width) ? width + 'px' : width,
     '--height': !isNaN(height) ? height + 'px' : height,
-    display: visible ? 'block' : 'none'
+    display: visible ? 'block' : 'none',
   }
 
   return (
-    <button
-      className={classes}
-      style={dynamicStyles}
-      {...attrs}
-    >
+    <button className={classes} style={dynamicStyles} {...attrs}>
       {children}
     </button>
   )
@@ -57,14 +48,8 @@ Button.propTypes = {
   fontSize: PropTypes.string,
   round: PropTypes.bool,
   visible: PropTypes.bool,
-  width: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  height: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
 Button.defaultProps = {

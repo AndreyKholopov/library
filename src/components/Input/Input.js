@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from "react"
-import PropTypes from "prop-types"
-import classNames from "classnames"
+import { useState, useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 
-import useClickOutside from "../../hooks/useClickOutside"
-import DropList from "../DropList/DropList"
+import useClickOutside from '../../hooks/useClickOutside'
+import DropList from '../DropList/DropList'
 import './Input.scss'
 
 const Input = ({
@@ -33,7 +33,7 @@ const Input = ({
   const inputRef = useRef(null)
 
   useEffect(() => {
-    setShowValue(list?.find(el => el.value === value)?.name || '')
+    setShowValue(list?.find((el) => el.value === value)?.name || '')
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value])
@@ -44,10 +44,7 @@ const Input = ({
 
   useClickOutside(wrapperRef, () => setActive(false))
 
-  const classes = classNames(
-    className,
-    'input'
-  )
+  const classes = classNames(className, 'input')
 
   const classesField = classNames(
     'input__field',
@@ -56,9 +53,7 @@ const Input = ({
     isSelect && 'input__field_is-select'
   )
 
-  const classesLabel = classNames(
-    'input__label'
-  )
+  const classesLabel = classNames('input__label')
 
   const dynamicStyles = {
     '--color-background': backgroundColor,
@@ -66,15 +61,11 @@ const Input = ({
 
     '--size-bezel': bezelSize,
     '--size-radius': radiusSize,
-    fontSize: textSize
+    fontSize: textSize,
   }
 
   return (
-    <div
-      className={classes}
-      style={dynamicStyles}
-      ref={wrapperRef}
-    >
+    <div className={classes} style={dynamicStyles} ref={wrapperRef}>
       <label>
         <input
           ref={inputRef}
@@ -84,30 +75,33 @@ const Input = ({
           disabled={disabled}
           onFocus={() => setActive(true)}
           value={isSelect ? showValue : value}
-          onChange={e => {
+          onChange={(e) => {
             if (!isSelect) setValue(e.target.value)
           }}
           {...attrs}
         />
 
-        {(!hideLabelIfActive || (hideLabelIfActive && !active && !value)) &&
-          <span className={classesLabel}>{label}</span>}
+        {(!hideLabelIfActive || (hideLabelIfActive && !active && !value)) && (
+          <span className={classesLabel}>{label}</span>
+        )}
       </label>
 
-      {list && <DropList
-        active={active}
-        list={list}
-        load={loadList}
-        itemContent={listItemContent}
-        oneLineItem={oneLineItem}
-        handleClickOnList={(e, el) => {
-          if (handleClickOnList) handleClickOnList(el)
-          setActive(false)
-          if (isSelect) {
-            setValue(el.value)
-          }
-        }}
-      />}
+      {list && (
+        <DropList
+          active={active}
+          list={list}
+          load={loadList}
+          itemContent={listItemContent}
+          oneLineItem={oneLineItem}
+          handleClickOnList={(e, el) => {
+            if (handleClickOnList) handleClickOnList(el)
+            setActive(false)
+            if (isSelect) {
+              setValue(el.value)
+            }
+          }}
+        />
+      )}
     </div>
   )
 }

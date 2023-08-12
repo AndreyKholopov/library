@@ -1,4 +1,4 @@
-@import url("https://rsms.me/inter/inter.css");
+@import url('https://rsms.me/inter/inter.css');
 
 body {
   position: relative;
@@ -6,7 +6,7 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding: 50px 50px 100px 50px;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   background: #ccccff;
 }
 
@@ -58,7 +58,7 @@ pre {
 
     &::before {
       counter-increment: code;
-      content: counter(code) "  ";
+      content: counter(code) '  ';
     }
   }
 }

@@ -1,4 +1,4 @@
-import store from "../store/index"
+import store from '../store/index'
 
 const checkUser = () => {
   const userUid = localStorage.getItem('userUid')

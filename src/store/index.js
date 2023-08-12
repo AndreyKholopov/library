@@ -8,6 +8,6 @@ export default configureStore({
   reducer: {
     list: listReducer,
     item: itemReducer,
-    user: userSlice
+    user: userSlice,
   },
 })

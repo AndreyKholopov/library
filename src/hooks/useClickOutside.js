@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
 const useClickOutside = (ref, callback) => {
   useEffect(() => {
@@ -8,9 +8,9 @@ const useClickOutside = (ref, callback) => {
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside)
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside)
+      document.removeEventListener('mousedown', handleClickOutside)
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

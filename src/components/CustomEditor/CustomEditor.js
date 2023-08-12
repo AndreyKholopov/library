@@ -10,7 +10,7 @@ import PropTypes from 'prop-types'
 import Toolbar from './Toolbar/Toolbar'
 import createDndFilePlugin from './plugins/dndFiles'
 import createCodeStyle from './plugins/codeStyle'
-import decorator from './decorator/linkDecorator'
+import decorator from './decorator/compositeDecorator'
 import './CustomEditor.scss'
 import { EditorState } from 'draft-js'
 

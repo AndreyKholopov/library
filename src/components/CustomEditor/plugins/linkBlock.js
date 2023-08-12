@@ -1,8 +1,3 @@
-const Link = (props) => {
-  const { href } = props.contentState.getEntity(props.entityKey).getData()
-  return <a href={href}>{props.children}</a>
-}
-
 const blockRendererFn = (block, { getEditorState }) => {
   const editorState = getEditorState()
   const contentState = editorState.getCurrentContent()

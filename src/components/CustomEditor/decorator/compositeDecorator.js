@@ -11,7 +11,9 @@ const findLinkEntities = (contentBlock, callback, contentState) => {
 }
 
 const Link = (props) => {
-  const { href } = props.contentState.getEntity(props.entityKey).getData()
+  let { href } = props.contentState.getEntity(props.entityKey).getData()
+  if (!href) href = props.contentState.getEntity(props.entityKey).getData().url
+
   return (
     <a
       href={'/' + href}

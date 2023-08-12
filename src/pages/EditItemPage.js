@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { ContentState, EditorState, convertFromHTML } from 'draft-js'
+import {  EditorState } from 'draft-js'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { stateToHTML } from 'draft-js-export-html'
+import { stateFromHTML } from 'draft-js-import-html'
 
 import Card from '../components/Card/Card'
 import Editor from '../components/CustomEditor/CustomEditor'
@@ -53,11 +54,7 @@ function EditPage() {
     setItemType(item.itemType)
     setShortInfo(item.shortInfo)
 
-    const blocksFromHTML = convertFromHTML(item.info || '')
-    const state = ContentState.createFromBlockArray(
-      blocksFromHTML.contentBlocks,
-      blocksFromHTML.entityMap
-    )
+    const state = stateFromHTML(item.info)
 
     setEditorState(EditorState.createWithContent(state))
   }

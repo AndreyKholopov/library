@@ -10,20 +10,34 @@ const handleDroppedFiles = async (
   const editorState = getEditorState()
   const result = await toBase64(files[0])
   const contentState = editorState.getCurrentContent()
-  const atomicBlock = contentState
+
+  const blocksArray = contentState
     .getBlocksAsArray()
-    .filter((el) => el.text === result.slice(-5))
+    .filter((block) => block.type === 'atomic')
 
   try {
-    if (!atomicBlock.length)
+    let atomicBlock
+
+    blocksArray.filter((block) => {
+      block.findEntityRanges(
+        (item) => {
+          const entityKey = item.getEntity()
+          if (entityKey && contentState.getEntity(entityKey).getData().src === result) atomicBlock = block
+          return true
+        },
+        () => {}
+      )
+    })
+
+    if (!atomicBlock)
       throw new Error('Используйте вставку изображений с помощью тулбара')
 
-    if (atomicBlock[0].getKey() === selection.getStartKey())
+    if (atomicBlock.getKey() === selection.getStartKey())
       throw new Error('Ошибка: нельзя перетащить изображение на то же место')
 
     const newState = AtomicBlockUtils.moveAtomicBlock(
       editorState,
-      atomicBlock[0],
+      atomicBlock,
       selection
     )
 

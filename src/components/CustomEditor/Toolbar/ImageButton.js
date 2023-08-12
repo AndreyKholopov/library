@@ -84,7 +84,7 @@ const ImageButton = ({ setting, render, editorState, onChange, ...attrs }) => {
     return AtomicBlockUtils.insertAtomicBlock(
       newEditorState,
       entityKey,
-      base64.slice(-5)
+      ' '
     )
   }
 

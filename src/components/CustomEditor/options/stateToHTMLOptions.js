@@ -24,7 +24,7 @@ const stateToHTMLOptions = {
       return {
         element: 'a',
         attributes: {
-          href: data.href,
+          href: data.href || data.url,
         },
       }
     }

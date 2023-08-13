@@ -43,9 +43,13 @@ export const listSlice = createSlice({
 
       state.data = state.data.map((el) => (el.id === data.id ? data : el))
       if (data.itemType === 'definition')
-        state.onlyDefinitionsData = state.data.map((el) =>
-          el.id === action.payload.id ? action.payload : el
-        )
+        state.onlyDefinitionsData = state.data
+          .filter((el) => el.itemType === 'definition')
+          .map((el) => {
+            const elData = { ...el }
+            elData.color = null
+            return elData.id === action.payload.id ? action.payload : elData
+          })
     },
   },
 })

@@ -46,10 +46,9 @@ const DropList = ({
       {oneLineItem &&
         !load &&
         list.map((el, i) => (
-          <div className='drop__item_one-line-wrap'>
+          <div className="drop__item_one-line-wrap" key={el.id ? el.id : i}>
             <li
               className={liClasses}
-              key={el.id ? el.id : i}
               style={dynamicStyles(el.color || 'white')}
               onClick={(e) => handleClickOnList(e, el)}
             >

@@ -49,6 +49,7 @@
     &_one-line {
       border-top: 0px;
       width: max-content;
+      min-width: calc(100% - 16px);
 
       &-wrap {
         @include scroll;

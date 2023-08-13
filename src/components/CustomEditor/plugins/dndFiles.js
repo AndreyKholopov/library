@@ -22,10 +22,16 @@ const handleDroppedFiles = async (
       block.findEntityRanges(
         (item) => {
           const entityKey = item.getEntity()
-          if (entityKey && contentState.getEntity(entityKey).getData().src === result) atomicBlock = block
+          if (
+            entityKey &&
+            contentState.getEntity(entityKey).getData().src === result
+          )
+            atomicBlock = block
           return true
         },
-        () => {}
+        () => {
+          return
+        }
       )
     })
 

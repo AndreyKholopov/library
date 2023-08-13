@@ -1,42 +1,4 @@
-.drop {
-  display: none;
-  position: absolute;
-  list-style-type: none;
-  background: white;
-  padding-left: 0;
-  border: 3px solid currentColor;
-  margin-top: 0;
-  width: calc(100% - 6px);
-  max-height: 50vh;
-  overflow: auto;
-  border-bottom-right-radius: 16px;
-  border-bottom-left-radius: 16px;
-  cursor: pointer;
-  z-index: 100;
-
-  &__item {
-    padding: calc(0.5rem * 0.75) 0.5rem;
-    border-top: 3px solid currentColor;
-    background: var(--item-color);
-
-    &_one-line {
-      overflow: hidden;
-      height: 18px;
-    }
-
-    &:first-child {
-      border-top: 0px;
-    }
-
-    &:hover {
-      background: color-mix(in srgb, var(--item-color), #000 10%);
-    }
-  }
-
-  &_visible {
-    display: block;
-  }
-
+@mixin scroll {
   &::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -58,5 +20,60 @@
 
   &::-webkit-scrollbar-thumb:active {
     background: rgba(0, 0, 0, 0.9);
+  }
+}
+
+.drop {
+  @include scroll;
+
+  display: none;
+  position: absolute;
+  list-style-type: none;
+  background: white;
+  padding-left: 0;
+  border: 3px solid currentColor;
+  margin-top: 0;
+  width: calc(100% - 6px);
+  max-height: 50vh;
+  overflow: auto;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+  cursor: pointer;
+  z-index: 100;
+
+  &__item {
+    padding: calc(0.5rem * 0.75) 0.5rem;
+    border-top: 3px solid currentColor;
+    background: var(--item-color);
+
+    &_one-line {
+      border-top: 0px;
+      width: max-content;
+
+      &-wrap {
+        @include scroll;
+
+        border-top: 3px solid currentColor;
+        overflow-y: hidden;
+        overflow-x: auto;
+        height: 32px;
+
+        &:first-child {
+          border-top: 0px;
+        }
+      }
+    }
+
+    &:first-child {
+      border-top: 0px;
+    }
+
+    &:hover {
+      background: color-mix(in srgb, var(--item-color), #000 10%);
+    }
+  }
+
+  &_visible {
+    display: block;
   }
 }

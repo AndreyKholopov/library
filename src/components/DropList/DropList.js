@@ -30,7 +30,8 @@ const DropList = ({
         <li className={liClasses}>По данному запросу ничего не найдено</li>
       )}
 
-      {!load &&
+      {!oneLineItem &&
+        !load &&
         list.map((el, i) => (
           <li
             className={liClasses}
@@ -40,6 +41,21 @@ const DropList = ({
           >
             {itemContent ? el[itemContent] : el.name}
           </li>
+        ))}
+
+      {oneLineItem &&
+        !load &&
+        list.map((el, i) => (
+          <div className='drop__item_one-line-wrap'>
+            <li
+              className={liClasses}
+              key={el.id ? el.id : i}
+              style={dynamicStyles(el.color || 'white')}
+              onClick={(e) => handleClickOnList(e, el)}
+            >
+              {itemContent ? el[itemContent] : el.name}
+            </li>
+          </div>
         ))}
     </ul>
   )

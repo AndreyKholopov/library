@@ -18,7 +18,7 @@ const handleDroppedFiles = async (
   try {
     let atomicBlock
 
-    blocksArray.filter((block) => {
+    blocksArray.forEach((block) => {
       block.findEntityRanges(
         (item) => {
           const entityKey = item.getEntity()
@@ -29,9 +29,7 @@ const handleDroppedFiles = async (
             atomicBlock = block
           return true
         },
-        () => {
-          return
-        }
+        () => {}
       )
     })
 

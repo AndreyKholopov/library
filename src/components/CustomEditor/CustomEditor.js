@@ -12,7 +12,7 @@ import createDndFilePlugin from './plugins/dndFiles'
 import createCodeStyle from './plugins/codeStyle'
 import decorator from './decorator/compositeDecorator'
 import './CustomEditor.scss'
-import { EditorState } from 'draft-js'
+import { EditorState, RichUtils, getDefaultKeyBinding } from 'draft-js'
 
 const resizeablePlugin = createResizeablePlugin()
 const focusPlugin = createFocusPlugin()
@@ -42,6 +42,23 @@ const CustomEditor = ({
     codeStyle,
   ]
 
+  const myKeyBindingFn = (e) => {
+    if (e.shiftKey && e.code === 'Enter') {
+      return 'line-translation'
+    }
+
+    return getDefaultKeyBinding(e)
+  }
+
+  const handleKeyCommand = (command, state) => {
+    if (command === 'line-translation') {
+      onChange(RichUtils.insertSoftNewline(state))
+
+      return 'handled'
+    }
+    return 'not-handled'
+  }
+
   const dynamicStyles = {
     borderColor: borderColor,
     borderRadius: radiusSize,
@@ -64,6 +81,8 @@ const CustomEditor = ({
 
         <Editor
           editorState={editorState}
+          handleKeyCommand={handleKeyCommand}
+          keyBindingFn={myKeyBindingFn}
           onChange={(state) => onChange(EditorState.set(state, { decorator }))}
           plugins={plugins}
           spellCheck={true}

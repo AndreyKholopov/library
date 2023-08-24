@@ -49,7 +49,7 @@ const Input = ({
   const classesField = classNames(
     'input__field',
     !hideLabelIfActive && 'input__field_active-animation',
-    list?.length && active && 'input__field_active',
+    active && 'input__field_active',
     isSelect && 'input__field_is-select'
   )
 

@@ -9,5 +9,15 @@
       bottom: 10px;
       right: 10px;
     }
+    
+    // ios hack
+    @media not all and (min-resolution:.001dpcm) { 
+      @supports (-webkit-appearance:none) {
+        span {
+          position: relative;
+          top: -3px;
+        }
+      }
+    }
   }
 }

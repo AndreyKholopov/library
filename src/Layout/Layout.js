@@ -95,7 +95,7 @@ function Layout() {
           className={addButtonClass}
           onClick={loginOnClick}
         >
-          +
+          <span>+</span>
         </Button>
       )}
     </>

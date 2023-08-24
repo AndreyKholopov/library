@@ -77,4 +77,11 @@
   &_visible {
     display: block;
   }
+
+   // ios hack
+   @media not all and (min-resolution:.001dpcm) { 
+    @supports (-webkit-appearance:none) {
+      margin-top: -3px;
+    }
+  }
 }

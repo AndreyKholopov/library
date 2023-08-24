@@ -26,13 +26,17 @@
 }
 
 body {
+  margin: 0;
+  background: #ccccff;
+}
+
+#root {
   position: relative;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
   padding: 50px 50px 100px 50px;
   font-family: 'Inter', sans-serif;
-  background: #ccccff;
 }
 
 main {

@@ -1,19 +1,46 @@
 .layout {
+  &__back-button,
   &__add-button {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
     z-index: 100;
+    bottom: 25px;
 
     @media (max-width: 480px) {
       bottom: 10px;
+    }
+  }
+
+  &__back-button {
+    left: 25px;
+
+    @media (max-width: 480px) {
+      left: 10px;
+    }
+
+    span {
+      position: relative;
+      top: -4px;
+
+       // ios hack
+       @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) {
+          top: 0;
+        }
+      }
+    }
+  }
+
+  &__add-button {
+    right: 25px;
+
+    @media (max-width: 480px) {
       right: 10px;
     }
-    
-    // ios hack
-    @media not all and (min-resolution:.001dpcm) { 
-      @supports (-webkit-appearance:none) {
-        span {
+
+    span {
+      // ios hack
+      @media not all and (min-resolution: 0.001dpcm) {
+        @supports (-webkit-appearance: none) {
           position: relative;
           top: -3px;
         }

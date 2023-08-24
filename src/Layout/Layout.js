@@ -30,8 +30,12 @@ function Layout() {
   const fuse = new Fuse(list, fuseOptions)
 
   const addButtonLocationsNotVisible = ['/create', '/edit']
+  const backButtonLocationsVisible = ['/create', '/edit', '/error']
 
-  const isVisible = !addButtonLocationsNotVisible.find((el) =>
+  const isVisibleAddButton = !addButtonLocationsNotVisible.find((el) =>
+    location.pathname.includes(el)
+  )
+  const isVisibleBackButton = backButtonLocationsVisible.find((el) =>
     location.pathname.includes(el)
   )
 
@@ -67,6 +71,7 @@ function Layout() {
   }
 
   const addButtonClass = classNames('layout__add-button')
+  const backButtonClass = classNames('layout__back-button')
 
   return (
     <>
@@ -87,7 +92,19 @@ function Layout() {
         <Outlet />
       </main>
 
-      {isVisible && (
+      {isVisibleBackButton && (
+        <Button
+          round
+          width={75}
+          fontSize="2.5rem"
+          className={backButtonClass}
+          onClick={() => navigate('/')}
+        >
+          <span>&#8592;</span>
+        </Button>
+      )}
+
+      {isVisibleAddButton && (
         <Button
           round
           width={75}

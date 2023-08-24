@@ -4,5 +4,10 @@
     bottom: 25px;
     right: 25px;
     z-index: 100;
+
+    @media (max-width: 480px) {
+      bottom: 10px;
+      right: 10px;
+    }
   }
 }

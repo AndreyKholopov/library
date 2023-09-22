@@ -104,7 +104,10 @@ pre {
 
     &::before {
       counter-increment: code;
-      content: counter(code) '  ';
+      content: counter(code);
+
+      display: inline-block;
+      width: 32px;
     }
   }
 }
